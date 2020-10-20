@@ -4,7 +4,7 @@ pipeline {
     maven 'Maven 3.6.3'
   }
   stages {
-    stage('build' {
+    stage('build') {
       steps {
         echo 'step 1 '
         sh 'mvn - f worker/pom.xml compile'
