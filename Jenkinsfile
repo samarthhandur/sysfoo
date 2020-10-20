@@ -10,7 +10,7 @@ pipeline {
         sh 'mvn - f worker/pom.xml compile'
       }
     }
-    stage('test') {
+    stage ('test') {
       steps {
         echo 'step 2'
         sh 'mvn - f worker/pom.xml test'
