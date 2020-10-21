@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.6.3-jdk-11-slim'
-    }
-
-  }
+  agent none
   stages {
     stage('build') {
       agent {
@@ -20,6 +15,12 @@ pipeline {
     }
 
     stage('test') {
+      agent {
+        docker {
+          image 'maven:3.6.3-jdk-11-slim'
+        }
+
+      }
       steps {
         echo 'step 2'
         sh 'mvn clean test'
@@ -27,6 +28,12 @@ pipeline {
     }
 
     stage('package') {
+      agent {
+        docker {
+          image 'maven:3.6.3-jdk-11-slim'
+        }
+
+      }
       steps {
         echo 'step 3'
         sh 'mvn package -DskipTests'
@@ -34,6 +41,7 @@ pipeline {
     }
 
     stage('Docker build and push') {
+      agent any
       steps {
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
